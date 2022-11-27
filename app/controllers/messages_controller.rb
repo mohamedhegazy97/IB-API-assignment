@@ -24,17 +24,23 @@ class MessagesController < ApplicationController
     set_message_count
     set_count
     publish
-    render json: @message
-  end
+    render json: show_user
+    #render json: @message
+ end
 
   # PATCH/PUT /messages/1
   def update
     update_message
-    render json: @message
-  end
+    render json: show_user
+    #render json: @message
+ end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def show_user
+      return {"message number": "#{@message.number}","content": "#{@message.content}"}
+    end
+
     def update_message
       Publisher.publish("chat", @message.update("content":params[:query]))
     end
