@@ -26,7 +26,7 @@ class ApplicationsController < ApplicationController
 
   # PATCH/PUT /applications/1
   def update
-    Publisher.publish("chat", @application.update(application_params))
+    Publisher.publish("chat", @application.update("name":params[:name]))
     render json: show_user
     #render json: @application
   end
