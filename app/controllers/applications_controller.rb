@@ -33,6 +33,14 @@ class ApplicationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def show_user_created(token)
+      return {"apptoken": "#{token}","name": "#{@application.name}","chat_count": "#{@application.chat_count}"}
+    end
+    
+    def show_user
+      return {"apptoken": "#{@application.token}","name": "#{@application.name}","chat_count": "#{@application.chat_count}"}
+    end 
+    
     def publish
       Publisher.publish("chat", @application.save)
     end
