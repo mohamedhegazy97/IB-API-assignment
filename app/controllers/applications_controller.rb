@@ -9,7 +9,8 @@ class ApplicationsController < ApplicationController
 
   # GET /applications/1
   def show
-    render json: @application
+    render json: show_user
+    #render json: @application
   end
 
   # POST /applications
@@ -19,13 +20,15 @@ class ApplicationsController < ApplicationController
     set_token(token)
     set_count
     publish
-    render json: @application
+    #render json: @application
+    render json: show_user_created(token)
   end
 
   # PATCH/PUT /applications/1
   def update
     Publisher.publish("chat", @application.update(application_params))
-    render json: @application
+    render json: show_user
+    #render json: @application
   end
 
   private
@@ -46,6 +49,10 @@ class ApplicationsController < ApplicationController
 
     def create_token
       random_token = SecureRandom.urlsafe_base64(nil, false)
+      while Application.find_by_token(random_token) != nil
+        random_token = SecureRandom.urlsafe_base64(nil, false)
+      end
+      return random_token
     end
 
     def set_application
