@@ -54,11 +54,12 @@
           
           
           ->updating an app
+          * PATCH : http://localhost:3001/applications/(the token returned in the app creation)?name=(name to be updated)
             
           
           
           ->updating a message
-            * POST :  http://localhost:3001/applications/(the token returned in the app creation)/chats/(number of chat returned in chat creation)/messages/(number of message returned in message creation)?query=(content to be updated to )
+            * PATCH :  http://localhost:3001/applications/(the token returned in the app creation)/chats/(number of chat returned in chat creation)/messages/(number of message returned in message creation)?query=(content to be updated to )
             
           
           ->searching a message in a chat of an app
