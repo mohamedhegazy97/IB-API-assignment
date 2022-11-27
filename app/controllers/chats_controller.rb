@@ -9,7 +9,8 @@ class ChatsController < ApplicationController
 
   # GET /chats/1
   def show
-    render json: @chat
+    render json: show_user
+    #render json: @chat
   end
 
   # POST /chats
@@ -20,14 +21,19 @@ class ChatsController < ApplicationController
     set_count
     set_number
     publish
-    render json: @chat
+    render json: show_user
+    #render json: @chat
   end
 
 
   private
     # Use callbacks to share common setup or constraints between actions.
+     def show_user
+      return {"chat number": "#{@chat.number}","messages in chat": "#{@chat.message_count}"}
+    end
+    
     def find_chats_in_app
-      @chats = Chat.where("AppToken":"#{params[:AppToken]}")
+      @chats = Chat.where("AppToken":"#{params[:AppToken]}").select(:number , :message_count)
     end
 
     def publish
